@@ -16,7 +16,7 @@ class Books
     #[ORM\ManyToOne]
     private ?authors $author = null;
 
-    #[ORM\Column(length: 150, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(length: 500, nullable: true)]
