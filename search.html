@@ -6,81 +6,89 @@
 <title>Résultats de la Recherche</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-    /* Styles spécifiques à cette page */
+    body {
+        font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Image d'arrière-plan */
+            background-size: cover;
+            background-position: center;
+    }
+
+    header {
+        background-color: transparent;
+        color: #000000;
+        padding: 10px;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    main {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .result-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .author-info {
+        text-align: center;
+    }
+
+    .author-info img {
+        max-width: 200px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    .author-info p {
+        margin: 10px 0;
+    }
+
+    footer {
+        background-color: transparent;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
 </style>
 </head>
 <body>
     <header>
-        <h1>Résultats de la Recherche</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-            </ul>
-        </nav>
+        <h1>Résultat de la Recherche</h1>
     </header>
     <main>
-        <section id="search-results">
-            <!-- Contenu généré dynamiquement en fonction des résultats de la recherche -->
-        </section>
+        <div class="result-container">
+            <div class="author-info">
+                <img src="loutre.png" alt="Photo de l'auteur">
+                <h2>Nom de l'auteur</h2>
+                <p>Alias: Alias de l'auteur</p>
+                <p>Date de naissance: Date de naissance de l'auteur</p>
+                <p>Date de décès: Date de décès de l'auteur</p>
+                <p><a href="page_web_de_lauteur">Site Web de l'auteur</a></p>
+                <p>Biographie de l'auteur.</p>
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2024 Recherche d'Auteur ou de Livre</p>
+        <p>&copy; 2024 La Loutre</p>
     </footer>
-
-    <!-- Script JavaScript -->
-    <script>
-        // Supposons que vous ayez un objet auteur avec les informations de l'auteur
-        var auteur = {
-            name: "Nom de l'auteur",
-            alias: "Alias de l'auteur",
-            birth_date: "Date de naissance de l'auteur",
-            death_date: "Date de décès de l'auteur",
-            webpage: "Page web de l'auteur",
-            bio: "Biographie de l'auteur.",
-            photo: "url_de_la_photo.jpg"
-        };
-
-        // Sélection de la section des résultats
-        var sectionResultats = document.getElementById("search-results");
-
-        // Création des éléments HTML pour afficher les informations de l'auteur
-        var divAuteur = document.createElement("div");
-        divAuteur.classList.add("auteur-info");
-
-        var titreAuteur = document.createElement("h2");
-        titreAuteur.textContent = auteur.name;
-
-        var aliasAuteur = document.createElement("p");
-        aliasAuteur.textContent = "Alias: " + auteur.alias;
-
-        var dateNaissance = document.createElement("p");
-        dateNaissance.textContent = "Date de naissance: " + auteur.birth_date;
-
-        var dateDeces = document.createElement("p");
-        dateDeces.textContent = "Date de décès: " + auteur.death_date;
-
-        var siteWeb = document.createElement("p");
-        var lienWeb = document.createElement("a");
-        lienWeb.href = auteur.webpage;
-        lienWeb.textContent = "Site Web de l'auteur";
-        siteWeb.appendChild(lienWeb);
-
-        var paragrapheBio = document.createElement("p");
-        paragrapheBio.textContent = auteur.bio;
-
-        var imageAuteur = document.createElement("img");
-        imageAuteur.src = auteur.photo;
-        imageAuteur.alt = "Photo de l'auteur";
-
-        // Ajout des éléments à la section des résultats
-        divAuteur.appendChild(titreAuteur);
-        divAuteur.appendChild(aliasAuteur);
-        divAuteur.appendChild(dateNaissance);
-        divAuteur.appendChild(dateDeces);
-        divAuteur.appendChild(siteWeb);
-        divAuteur.appendChild(paragrapheBio);
-        divAuteur.appendChild(imageAuteur);
-        sectionResultats.appendChild(divAuteur);
-    </script>
 </body>
 </html>
