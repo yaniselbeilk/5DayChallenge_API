@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Résultats de la Recherche</title>
+		{% block stylesheets %}
+			<link href="{{ asset('/styles/styles.css') }}" type="text/css" rel="stylesheet"/>
+		{% endblock %}
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f8f8f8;
+				margin: 0;
+				padding: 0;
+				background-image: url("{{asset('/images/background.jpg')}}"); /* Image d'arrière-plan */
+
+				background-size: cover;
+				background-position: center;
+			}
+
+			header {
+				background-color: transparent;
+				color: #000000;
+				padding: 10px;
+				text-align: center;
+				border-bottom: none;
+			}
+
+			h1 {
+				font-size: 36px;
+				margin: 0;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				font-family: 'Times New Roman', serif; /* Police victorienne */
+				color: rgb(255, 255, 255); /* Couleur du texte en noir */
+				text-align: center;
+			}
+
+			main {
+				padding: 20px;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.result-container {
+				background-color: #fff;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				margin-top: 20px;
+			}
+
+			.author-info {
+				text-align: center;
+			}
+
+			.author-info img {
+				max-width: 200px;
+				border-radius: 50%;
+				margin-bottom: 20px;
+			}
+
+			.author-info p {
+				margin: 10px 0;
+			}
+
+			footer {
+				background-color: transparent;
+				color: #ffffff;
+				text-align: center;
+				padding: 10px;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Résultat de la Recherche</h1>
+		</header>
+		<main>
+			{% for author in dataAuthors %}
+				<div class="result-container">
+					<div class="author-info">
+						<img src="{{ asset('/images/loutre.png') }}" alt="Photo de l'auteur">
+						<h2>{{author.getName()}}</h2>
+						<p>Alias:
+							{{author.getAlias()}}</p>
+						<p>Date de naissance:
+							{{author.getBirthDate()}}</p>
+						<p>Date de décès:
+							{{author.getDeathDate()}}</p>
+						<p>
+							<a href="{{author.getWebpage()}}">Site Web de l'auteur</a>
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+		</main>
+		<footer>
+			<p>&copy; 2024 La Loutre</p>
+		</footer>
+	</body>
+</html></body></html>

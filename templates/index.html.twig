@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Search by La Loutre</title>
+		{% block stylesheets %}
+			<link href="{{ asset('/styles/styles.css') }}" type="text/css" rel="stylesheet"/>
+		{% endblock %}
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f8f8f8;
+				margin: 0;
+				padding: 0;
+				background-image: url("{{asset('/images/background.jpg')}}"); /* Image d'arrière-plan */
+				background-size: cover;
+				background-position: center;
+			}
+
+			main {
+				padding: 20px;
+				max-width: 800px;
+				margin: 80px auto;
+				position: relative; /* Ajout d'une position relative pour le positionnement de l'image */
+			}
+
+			h1 {
+				font-size: 36px;
+				margin: 0;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				font-family: 'Times New Roman', serif; /* Police victorienne */
+				color: black; /* Couleur du texte en noir */
+				text-align: center;
+			}
+
+			#search-section {
+				background-color: #fff;
+				padding: 50px; /* Augmentation de la marge interne */
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				max-width: 1000px; /* Augmenter la largeur maximale */
+			}
+
+			h2 {
+				font-size: 24px;
+				margin-top: 0;
+				margin-bottom: 20px;
+				text-align: center;
+				color: #333;
+			}
+
+			form {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: 20px;
+			}
+
+			input[type="text"],
+			select {
+				padding: 15px;
+				font-size: 18px;
+				margin-right: 20px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				flex: 1;
+			}
+
+			button {
+				background-color: #4caf50;
+				color: white;
+				padding: 15px 30px;
+				font-size: 18px;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			button:hover {
+				background-color: #45a049;
+			}
+
+			.mascot {
+				position: absolute;
+				bottom: 20px; /* Positionnement à 20px du bas */
+				left: -60px; /* Positionnement à 20px de la gauche */
+				max-width: 150px; /* Ajustement de la taille */
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Search by La Loutre</h1>
+			<section id="search-section">
+				<h2>Effectuer une Recherche</h2>
+				<p>Bienvenue sur Search by La Loutre, grâce à notre site web vous pouvez trouver un auteur ou un livre en simple clic.</p>
+				<p>Commencez dès maintenant !</p>
+				<form action="/Recherche/author" method="post" id="searchForm" name="searchForm">
+					<input type="text" name="query" placeholder="Entrez votre recherche...">
+					<select name="type" onchange="switchOption()" id="searchSelect">
+						<option value="author">Auteur</option>
+						<option value="book">Livre</option>
+					</select>
+					<button type="submit">Rechercher</button>
+				</form>
+			</section>
+			<!-- Contenu principal généré dynamiquement en fonction de la recherche -->
+			<img src="{{ asset('/images/loutre.png') }}" alt="Mascotte" class="mascot">
+		</main>
+	</body>
+</html>
+<script>
+	function switchOption() {
+const form = document.getElementById("searchForm");
+const select = document.getElementById("searchSelect");
+if (select.value === "author") {
+form.action = "Recherche/author";
+} else {
+form.action = "Recherche/book";
+}
+}
+</script>
