@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résultats de la Recherche</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Image d'arrière-plan */
+            background-size: cover;
+            background-position: center;
+    }
+
+    header {
+        background-color: transparent;
+        color: #000000;
+        padding: 10px;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    h1 {
+        font-size: 36px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Times New Roman', serif; /* Police victorienne */
+            color: rgb(255, 255, 255); /* Couleur du texte en noir */
+            text-align: center;
+    }
+
+    main {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .result-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .book-info {
+        text-align: center;
+    }
+
+    .book-info p {
+        margin: 10px 0;
+    }
+
+    footer {
+        background-color: transparent;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .book-cover {
+        max-width: 200px;
+        margin: 20px auto;
+        display: block;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Résultat de la Recherche</h1>
+    </header>
+    <main>
+        <div class="result-container">
+            <div class="book-info">
+                <h2>Titre du Livre</h2>
+                <p>Auteur: Nom de l'auteur</p>
+                <p>Description: Description du livre</p>
+                <p>Languages: Langues disponibles</p>
+                <p>Bookshelves: dfsvsef</p>
+                <p>Sujets: Sujets du livre</p>
+                
+                <!-- Intégration du code PHP pour afficher dynamiquement l'image de la première de couverture -->
+                <?php
+                // Connexion à la base de données
+                $conn = new mysqli("localhost", "utilisateur", "motdepasse", "basededonnees");
+
+                // Vérifier la connexion
+                if ($conn->connect_error) {
+                    die("Erreur de connexion à la base de données : " . $conn->connect_error);
+                }
+
+                // Requête pour récupérer le chemin de l'image de la première de couverture du livre
+                $sql = "SELECT image_path FROM livres WHERE titre = 'Titre du Livre'";
+                $result = $conn->query($sql);
+
+                // Vérifier s'il y a des résultats
+                if ($result->num_rows > 0) {
+                    // Afficher le chemin de l'image de la première de couverture
+                    $row = $result->fetch_assoc();
+                    $image_path = $row["image_path"];
+                    echo '<img src="' . $image_path . '" alt="Première de couverture du livre" class="book-cover">';
+                } else {
+                    // Si aucun résultat n'est trouvé, utiliser une image par défaut
+                    $default_image_path = "chemin/vers/image_par_defaut.jpg";
+                    echo '<img src="' . $default_image_path . '" alt="Image par défaut" class="book-cover">';
+                }
+
+                // Fermer la connexion à la base de données
+                $conn->close();
+                ?>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 La Loutre</p>
+    </footer>
+</body>
+</html>

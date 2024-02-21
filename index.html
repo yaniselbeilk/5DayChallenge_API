@@ -29,7 +29,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Times New Roman', serif; /* Police victorienne */
-            color: black; /* Couleur du texte en noir */
+            color: rgb(255, 255, 255); /* Couleur du texte en noir */
             text-align: center;
         }
 
@@ -96,7 +96,7 @@
             <h2>Effectuer une Recherche</h2>
             <p>Bienvenue sur Search by La Loutre, grâce à notre site web vous pouvez trouver un auteur ou un livre en simple clic.</p>
             <p>Commencez dès maintenant !</p>
-            <form action="search.html" method="get">
+            <form id="searchForm" method="get">
                 <input type="text" name="query" placeholder="Entrez votre recherche...">
                 <select name="type">
                     <option value="author">Auteur</option>
@@ -108,5 +108,21 @@
         <!-- Contenu principal généré dynamiquement en fonction de la recherche -->
         <img src="loutre.png" alt="Mascotte" class="mascot">
     </main>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche le formulaire d'être soumis normalement
+
+            var form = event.target;
+            var selectedType = form.querySelector("select[name='type']").value;
+
+            // Redirection en fonction de l'option sélectionnée
+            if (selectedType === "author") {
+                window.location.href = "search.html?" + new URLSearchParams(new FormData(form)).toString();
+            } else if (selectedType === "book") {
+                window.location.href = "book.html?" + new URLSearchParams(new FormData(form)).toString();
+            }
+        });
+    </script>
 </body>
 </html>
