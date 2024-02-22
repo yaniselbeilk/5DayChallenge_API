@@ -11,7 +11,7 @@ cur = conn.cursor()
 insert_query_authors = "INSERT INTO authors (name, alias, birth_date, death_date, webpage) VALUES (%s, %s, %s, %s, %s)"
 insert_query_books = "INSERT INTO books (id_author, name, description, languages, Bookshelves, Subjects) VALUES (%s, %s, %s, %s, %s, %s)"
 
-for i in range(2791, 6333):
+for i in range(1, 6333):
     url_persons = api_url_person + "?page=" + str(i)
     print(url_persons)
     response = requests.get(url_persons)
