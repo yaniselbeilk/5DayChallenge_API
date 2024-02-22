@@ -43,3 +43,16 @@ footer {
     bottom: 0;
     width: 100%;
 }
+.retour-accueil {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+.retour-accueil:hover {
+    background: #D6D6D6;
+}
