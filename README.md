@@ -7,4 +7,5 @@ symfony server:start
 composer update
 
 # Pour la mise à jour de la BDD
+php bin/console doctrine:migrations:migrate
 php bin/console doctrine:schema:update --force

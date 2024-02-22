@@ -17,32 +17,36 @@ class ScriptEnterDataController extends AbstractController
   public function scriptEnterDataController(HttpClientInterface $client, EntityManagerInterface $entityManager): Response
   {
     $AuthorRepository = $entityManager->getRepository(Authors::class);
-    for ($i = 1; $i < 6; $i++) {
+    for ($i = 0; $i < 9; $i++) {
       $response = $client->request(
         'GET',
-        'https://gnikdroy.pythonanywhere.com/api/book?page=' . $i
+        'https://gnikdroy.pythonanywhere.com/api/book?page=' . $i + 1
       );
       foreach ($response->toArray()["results"] as $dataBook) {
         //*****************************************************
         //                  Fetch author
         //*****************************************************
-        $dataAuthor = $client->request(
-          'GET',
-          'https://gnikdroy.pythonanywhere.com/api/person/' . $dataBook["agents"][0]["id"]
-        );
-        if ($dataAuthor->getStatusCode() == 200) {
-          $dataAuthor = $dataAuthor->toArray();
-          $author = $AuthorRepository->findOneBy(['name' => $dataAuthor["name"]]);
-          if ($author == null) {
-            $author = new Authors();
-            $author->setName($dataAuthor["name"]);
-            $author->setAlias($dataAuthor["alias"]);
-            $author->setBirthDate($dataAuthor["birth_date"]);
-            $author->setDeathDate($dataAuthor["death_date"]);
-            $author->setWebpage($dataAuthor["webpage"]);
-            //persist
-            $entityManager->persist($author);
-            $entityManager->flush();
+        if (isset($dataBook["agents"][0])) {
+          $dataAuthor = $client->request(
+            'GET',
+            'https://gnikdroy.pythonanywhere.com/api/person/' . $dataBook["agents"][0]["id"]
+          );
+          if ($dataAuthor->getStatusCode() == 200) {
+            $dataAuthor = $dataAuthor->toArray();
+            $author = $AuthorRepository->findOneBy(['name' => $dataAuthor["name"]]);
+            if ($author == null) {
+              $author = new Authors();
+              $author->setName($dataAuthor["name"]);
+              $author->setAlias($dataAuthor["alias"]);
+              $author->setBirthDate($dataAuthor["birth_date"]);
+              $author->setDeathDate($dataAuthor["death_date"]);
+              $author->setWebpage($dataAuthor["webpage"]);
+              //persist
+              $entityManager->persist($author);
+              $entityManager->flush();
+            }
+          } else {
+            $author = null;
           }
         } else {
           $author = null;
@@ -56,11 +60,7 @@ class ScriptEnterDataController extends AbstractController
         $book->setName($dataBook["title"]);
         $book->setDescription($dataBook["description"]);
         //Author
-        if ($dataBook["agents"][0]["id"] != null) {
-          $book->setAuthor($author);
-        } else {
-          $book->setAuthor(null);
-        }
+        $book->setAuthor($author);
         //Langue
         $langue = "";
         foreach ($dataBook["languages"] as $lg) {
