@@ -12,10 +12,10 @@ CREATE TABLE IF NOT EXISTS authors (
     webpage VARCHAR(200)
 );
 
-CREATE TABLE IF NOT EXISTS Books (
+CREATE TABLE IF NOT EXISTS books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_author int,
-    title VARCHAR(150),
+    name VARCHAR(500),
     description VARCHAR(500),
     languages VARCHAR(10),
     Bookshelves JSON,
