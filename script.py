@@ -4,7 +4,7 @@ api_url_person = "https://gnikdroy.pythonanywhere.com/api/person"
 host = "localhost"
 user = "challenge34"
 database = "challenge34"
-password = "41n0mtwyz4"
+password = ""
 
 conn = pymysql.connect(host=host, user=user, password=password, database=database, charset='utf8', use_unicode=True)
 cur = conn.cursor()
